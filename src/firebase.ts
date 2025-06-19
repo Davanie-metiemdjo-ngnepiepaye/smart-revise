@@ -1,21 +1,22 @@
 // src/firebase.ts
 
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+// Configuration Firebase avec process.env (CRA)
 const firebaseConfig = {
-  apiKey: "AIzaSyABr8o2A1qcFY740SgpWthjxt7H3w-77oM",
-  authDomain: "smart-revise.firebaseapp.com",
-  projectId: "smart-revise",
-  storageBucket: "smart-revise.firebasestorage.app",
-  messagingSenderId: "589021714869",
-  appId: "1:589021714869:web:65d1002feede90e11121fc",
-  measurementId: "G-78HWFK1SBK"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
 
-// ✅ On exporte bien auth et db ici
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const googleProvider = new GoogleAuthProvider();
